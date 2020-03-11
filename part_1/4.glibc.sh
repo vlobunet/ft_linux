@@ -23,16 +23,16 @@ build(){
 	make									|| return
 	make install							|| return
 
-	echo 'int main(){}' > dummy.c
-	$LFS_TGT-gcc dummy.c
-	readelf -l a.out | grep ': /tools'		|| return
-	rm -v dummy.c a.out
+	# echo 'int main(){}' > dummy.c
+	# $LFS_TGT-gcc dummy.c
+	# readelf -l a.out | grep ': /tools'		|| return
+	# rm -v dummy.c a.out
 }
 
-teardown(){
-	cd $LFS/sources
-	rm -rfv $dir_name
-}
+# teardown(){
+# 	cd $LFS/sources
+# 	rm -rfv $dir_name
+# }
 
 # Internal process
 
@@ -46,9 +46,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-if [ $status -eq 0 ]; then
-	teardown >> $LFS/sources/$dir_name.log 2>&1
-	status=$?
-fi
+# if [ $status -eq 0 ]; then
+# 	teardown >> $LFS/sources/$dir_name.log 2>&1
+# 	status=$?
+# fi
 
 exit $status

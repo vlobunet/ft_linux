@@ -25,10 +25,10 @@ build(){
 	ln -sv tclsh8.6 /tools/bin/tclsh		|| return
 }
 
-teardown(){
-	cd $LFS/sources
-	rm -rfv $dir_name
-}
+# teardown(){
+# 	cd $LFS/sources
+# 	rm -rfv $dir_name
+# }
 
 # Internal process
 
@@ -42,9 +42,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-if [ $status -eq 0 ]; then
-	teardown >> $LFS/sources/$dir_name.log 2>&1
-	status=$?
-fi
+# if [ $status -eq 0 ]; then
+# 	teardown >> $LFS/sources/$dir_name.log 2>&1
+# 	status=$?
+# fi
 
 exit $status

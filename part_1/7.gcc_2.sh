@@ -5,7 +5,7 @@ dir_name=$2
 status=0
 
 setup(){
-	tar -xf $tar_name										|| return
+	# tar -xf $tar_name										|| return
 	cd $dir_name											|| return
 
 	cat gcc/limitx.h gcc/glimits.h gcc/limity.h	\
@@ -57,16 +57,16 @@ build(){
 	ln -sv gcc /tools/bin/cc							|| return
 
 
-	echo 'int main(){}' > dummy.c
-	cc dummy.c											|| return
-	readelf -l a.out | grep ': /tools'					|| return
-	rm -v dummy.c a.out									|| return
+	# echo 'int main(){}' > dummy.c
+	# cc dummy.c											|| return
+	# readelf -l a.out | grep ': /tools'					|| return
+	# rm -v dummy.c a.out									|| return
 }
 
-teardown(){
-	cd $LFS/sources
-	rm -rfv $dir_name
-}
+# teardown(){
+# 	cd $LFS/sources
+# 	rm -rfv $dir_name
+# }
 
 # Internal process
 
@@ -80,9 +80,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-if [ $status -eq 0 ]; then
-	teardown >> $LFS/sources/$dir_name.log 2>&1
-	status=$?
-fi
+# if [ $status -eq 0 ]; then
+# 	teardown >> $LFS/sources/$dir_name.log 2>&1
+# 	status=$?
+# fi
 
 exit $status

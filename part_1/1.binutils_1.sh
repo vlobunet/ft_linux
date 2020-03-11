@@ -19,14 +19,14 @@ build(){
 		--disable-nls				\
 		--disable-werror									|| return
 	make													|| return
-	mkdir -v /tools/lib && ln -sv lib /tools/lib64			|| return
+	mkdir -v /tools/lib && ln -sv lib /tools/lib64
 	make install											|| return
 }
 
-teardown(){
-	cd $LFS/sources
-	rm -rfv $dir_name
-}
+# teardown(){
+# 	cd $LFS/sources
+# 	rm -rfv $dir_name
+# }
 
 # Internal process
 
@@ -40,9 +40,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-if [ $status -eq 0 ]; then
-	teardown >> $LFS/sources/$dir_name.log 2>&1
-	status=$?
-fi
+# if [ $status -eq 0 ]; then
+# 	teardown >> $LFS/sources/$dir_name.log 2>&1
+# 	status=$?
+# fi
 
 exit $status
