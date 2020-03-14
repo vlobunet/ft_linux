@@ -10,7 +10,7 @@ setup(){
 }
 
 build(){
-	cp -v configure{,.orig}	.									|| return
+	cp -v configure{,.orig}										|| return
 	sed 's:/usr/local/bin:/bin:' configure.orig > configure		|| return
 	./configure --prefix=/tools			\
 		--with-tcl=/tools/lib			\
@@ -19,10 +19,10 @@ build(){
 	make SCRIPTS="" install										|| return
 }
 
-# teardown(){
-# 	cd $LFS/sources
-# 	rm -rfv $dir_name
-# }
+teardown(){
+	cd $LFS/sources
+	rm -rfv $dir_name
+}
 
 # Internal process
 
@@ -36,9 +36,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-# if [ $status -eq 0 ]; then
-# 	teardown >> $LFS/sources/$dir_name.log 2>&1
-# 	status=$?
-# fi
+if [ $status -eq 0 ]; then
+	teardown >> $LFS/sources/$dir_name.log 2>&1
+	status=$?
+fi
 
 exit $status

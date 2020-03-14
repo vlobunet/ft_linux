@@ -7,8 +7,6 @@ status=0
 setup(){
 	tar -xf $tar_name										|| return
 	cd $dir_name											|| return
-
-	sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
 }
 
 build(){

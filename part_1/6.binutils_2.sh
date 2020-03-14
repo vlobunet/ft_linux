@@ -5,8 +5,8 @@ dir_name=$2
 status=0
 
 setup(){
-	# tar -xf $tar_name										|| return
-	cd $dir_name											|| return
+	tar -xf $tar_name					|| return
+	cd $dir_name						|| return
 	mkdir -v build						|| return
 	cd build							|| return
 }
@@ -16,10 +16,10 @@ build(){
 	AR=$LFS_TGT-ar                 \
 	RANLIB=$LFS_TGT-ranlib         \
 	../configure                   \
-	    --prefix=/tools            \
-	    --disable-nls              \
-	    --disable-werror           \
-	    --with-lib-path=/tools/lib \
+		--prefix=/tools            \
+		--disable-nls              \
+		--disable-werror           \
+		--with-lib-path=/tools/lib \
 		--with-sysroot					|| return
 	make								|| return
 	make install						|| return
@@ -28,10 +28,10 @@ build(){
 	cp -v ld/ld-new /tools/bin			|| return
 }
 
-# teardown(){
-# 	cd $LFS/sources
-# 	rm -rfv $dir_name
-# }
+teardown(){
+	cd $LFS/sources
+	rm -rfv $dir_name
+}
 
 # Internal process
 
@@ -45,9 +45,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-# if [ $status -eq 0 ]; then
-# 	teardown >> $LFS/sources/$dir_name.log 2>&1
-# 	status=$?
-# fi
+if [ $status -eq 0 ]; then
+	teardown >> $LFS/sources/$dir_name.log 2>&1
+	status=$?
+fi
 
 exit $status

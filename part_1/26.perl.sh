@@ -10,10 +10,6 @@ setup(){
 }
 
 build(){
-	sed -e '9751 a#ifndef PERL_IN_XSUB_RE' \
-    -e '9808 a#endif'                  \
-    -i regexec.c
-
 	sh Configure -des -Dprefix=/tools -Dlibs=-lm -Dlibs=-lm -Uloclibpth -Ulocincpth			|| return
 	make													|| return
 	cp -v perl cpan/podlators/scripts/pod2man /tools/bin	|| return

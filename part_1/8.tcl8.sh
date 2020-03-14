@@ -14,21 +14,16 @@ build(){
 	./configure --prefix=/tools				|| return
 
 	make									|| return
-
-	printf "\n================================= TEST =====================\n"
-	TZ=UTC
-	make test
-	printf "\n============================================================\n"
 	make install							|| return
 	chmod -v u+w /tools/lib/libtcl8.6.so	|| return
 	make install-private-headers			|| return
 	ln -sv tclsh8.6 /tools/bin/tclsh		|| return
 }
 
-# teardown(){
-# 	cd $LFS/sources
-# 	rm -rfv $dir_name
-# }
+teardown(){
+	cd $LFS/sources
+	rm -rfv $dir_name
+}
 
 # Internal process
 
@@ -42,9 +37,9 @@ if [ $status -eq 0 ]; then
 	status=$?
 fi
 
-# if [ $status -eq 0 ]; then
-# 	teardown >> $LFS/sources/$dir_name.log 2>&1
-# 	status=$?
-# fi
+if [ $status -eq 0 ]; then
+	teardown >> $LFS/sources/$dir_name.log 2>&1
+	status=$?
+fi
 
 exit $status

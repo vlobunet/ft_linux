@@ -10,8 +10,13 @@ setup(){
 }
 
 build(){
+	make -f Makefile-libbz2_so
+	make clean
 	make						|| return
 	make PREFIX=/tools install	|| return
+	cp -v bzip2-shared /tools/bin/bzip2 || return
+	cp -av libbz2.so* /tools/lib || return 
+	ln -sv libbz2.so.1.0 /tools/lib/libbz2.so || return
 }
 
 teardown(){

@@ -10,14 +10,9 @@ setup(){
 }
 
 build(){
-	cd gettext-tools										|| return
-	EMACS="no" ./configure --prefix=/tools --disable-shared	|| return
-	make -C gnulib-lib										|| return
-	make -C intl pluralx.c									|| return
-	make -C src msgfmt										|| return
-	make -C src msgmerge									|| return
-	make -C src xgettext									|| return
-	cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin			|| return
+	./configure --disable-shared || return
+	make || return
+	cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /tools/bin
 }
 
 teardown(){
