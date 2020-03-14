@@ -12,10 +12,10 @@ mount -v -t ext4 /dev/sdb3 $LFS/boot	|| exit 4
 #3.1. Introduction
 mkdir -pv $LFS/sources		|| exit 6
 chmod -v a+wt $LFS/sources	|| exit 7
-wget --input-file=http://www.linuxfromscratch.org/lfs/view/development/wget-list --continue --directory-prefix=$LFS/sources
-wget --input-file=$LFS/sources/wget-list --continue --directory-prefix=$LFS/sources
+wget -q --input-file=http://www.linuxfromscratch.org/lfs/view/development/wget-list --continue --directory-prefix=$LFS/sources
+wget -q --input-file=$LFS/sources/wget-list --continue --directory-prefix=$LFS/sources
 pushd $LFS/sources
-wget --input-file=http://www.linuxfromscratch.org/lfs/view/development/md5sums --continue --directory-prefix=$LFS/sources
+wget -q --input-file=http://www.linuxfromscratch.org/lfs/view/development/md5sums --continue --directory-prefix=$LFS/sources
 md5sum -c md5sums
 popd
 #4.2. Creating the $LFS/tools Directory
